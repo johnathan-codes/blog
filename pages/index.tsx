@@ -2,8 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import Link from 'next/link'
 
-const BLOG_URL = process.env.BLOG_URL
-const CONTENT_API_KEY = process.env.CONTENT_API_KEY
+const { BLOG_URL, CONTENT_API_KEY } = process.env
 
 type Post = {
 	title: string
@@ -12,7 +11,6 @@ type Post = {
 
 async function getPosts() {
 	const res = await fetch(
-		// `${BLOG_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}&fields=slug,title,custom_excerpt,reading_time&formats=plaintext`
 		`${BLOG_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}&fields=slug,title,custom_excerpt`
 	).then((res) => res.json())
 
@@ -40,7 +38,8 @@ const Home: React.FC<{ posts: Post[] }> = (props) => {
 					return (
 						<li key={post.slug}>
 							<Link href="/post/slug" as={`/post/${post.slug}`}>
-								{post.title}
+								{/* {post.title} */}
+								<a>{post.title}</a>
 							</Link>
 						</li>
 					)
