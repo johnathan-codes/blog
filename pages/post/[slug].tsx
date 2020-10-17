@@ -6,8 +6,9 @@ import styles from '../../styles/Home.module.scss'
 const { BLOG_URL, CONTENT_API_KEY } = process.env
 
 async function getPost(slug: string) {
+	const fields = 'slug,title,html,created_at,feature_image,custom_excerpt'
 	const res = await fetch(
-		`${BLOG_URL}/ghost/api/v3/content/posts/slug/${slug}?key=${CONTENT_API_KEY}&fields=slug,title,html,created_at`
+		`${BLOG_URL}/ghost/api/v3/content/posts/slug/${slug}?key=${CONTENT_API_KEY}&fields=${fields}`
 	).then((res) => res.json())
 
 	const posts = res.posts
@@ -35,6 +36,8 @@ type Post = {
 	title: string
 	slug: string
 	html: string
+	feature_image: string
+	custom_excerpt: string
 }
 
 const Post: React.FC<{ post: Post }> = (props) => {
@@ -69,6 +72,8 @@ const Post: React.FC<{ post: Post }> = (props) => {
 				</Link>
 			</p>
 			<h1>{post.title}</h1>
+			<p>{post.custom_excerpt}</p>
+			<img src={post.feature_image}></img>
 			<div dangerouslySetInnerHTML={{ __html: post.html }}></div>
 			{enableLoadComments && (
 				<a className={styles.goback} onClick={loadComments}>
