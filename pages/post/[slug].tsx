@@ -20,6 +20,7 @@ export const getStaticProps = async ({ params }) => {
 
 	return {
 		props: { post },
+		revalidate: 43200,
 	}
 }
 
@@ -70,9 +71,9 @@ const Post: React.FC<{ post: Post }> = (props) => {
 			<h1>{post.title}</h1>
 			<div dangerouslySetInnerHTML={{ __html: post.html }}></div>
 			{enableLoadComments && (
-				<button className={styles.goback} onClick={loadComments}>
-					Load Comments
-				</button>
+				<a className={styles.goback} onClick={loadComments}>
+					<i>Load Comments</i>
+				</a>
 			)}
 			<div id="disqus_thread"></div>
 		</div>
