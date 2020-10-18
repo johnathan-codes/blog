@@ -1,6 +1,6 @@
 module.exports = {
     // Do not include a trailing slash!
-    siteUrl: `https://johnathan.codes`,
+    siteUrl: `https://blog.johnathan.codes`,
 
     // Enable infinite scroll (default: true)
     infiniteScroll: true,
