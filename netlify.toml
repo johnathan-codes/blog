@@ -1,8 +1,9 @@
 [build]
-  command   = "npm run build"
-  functions = "out_functions"
-  publish   = "out_publish"
+  command = "gatsby build"
+  publish = "public"
 
-[template.environment]
-  CONTENT_API_KEY = "CONTENT_API_KEY"
-  BLOG_URL = "BLOG_URL"
+[template]
+  incoming-hooks = ["Ghost"]
+
+[[plugins]]
+  package = "netlify-plugin-gatsby-cache"
